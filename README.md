@@ -22,16 +22,20 @@ and in notices found in the various source files.
 ----
 ### Installation
 
-Copy provider into you Java SE 8 directory
-'cp target/legacy8ujsse-<version>.jar $JAVA_HOME/jre/lib/ext/legacy8ujsse.jar'
+Copy provider into you Java SE 8 directory:
 
-Copy provider security properties
-'cp conf/security/legacy8ujsse.security $JAVA_HOME/jre/lib/ext/legacy8ujsse.jar'
+    cp target/legacy8ujsse-<version>.jar $JAVA_HOME/jre/lib/ext/legacy8ujsse.jar
+
+Copy provider security properties:
+
+    cp conf/security/legacy8ujsse.security $JAVA_HOME/jre/lib/ext/legacy8ujsse.jar
 
 ----
 ### Enabling Legacy8uJSSE provider
  
 Add the Legacy8uJSSE provider to your list of registered security providers
 using the following cmdline option:
-'-Djava.security.properties=$JAVA_HOME/jre/lib/security/legacy8ujsse.security'
+
+    -Djava.security.properties=$JAVA_HOME/jre/lib/security/legacy8ujsse.security
+    
 The Legacy8uJSSE provider replaces the SunJSSE provider.
