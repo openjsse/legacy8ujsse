@@ -6,7 +6,7 @@
 # legacy8ujsse.security properties file may be specified
 # from the command line via the system property
 #
-#    -Djava.security.properties=<Path to openjsse.security>
+#    -Djava.security.properties=<Path to legacy8ujsse.security>
 #
 # This properties file appends to the master security properties file.
 # If both properties files specify values for the same key, the value

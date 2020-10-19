@@ -7,7 +7,7 @@
 
     <groupId>org.openjsse.legacy8ujsse</groupId>
     <artifactId>legacy8ujsse</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
 
 
     <name>legacy8ujsse</name>
@@ -56,7 +56,7 @@
         <url>scm:git:git://github.com/legacy8ujsse/legacy8ujsse.git</url>
         <connection>scm:git:git://github.com/legacy8ujsse/legacy8ujsse.git</connection>
         <developerConnection>scm:git:git@github.com:legacy8ujsse/legacy8ujsse.git</developerConnection>
-        <tag>1.1.0</tag>
+        <tag>1.1.1</tag>
     </scm>
 
 
@@ -105,6 +105,23 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>javadoc-jar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <classifier>javadoc</classifier>
+                            <classesDirectory>${basedir}/javadoc</classesDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
                 <version>3.1.0</version>
                 <executions>
@@ -124,7 +141,6 @@
                     <execution>
                         <phase>generate-sources</phase>
                         <goals>
-                            <goal>add-source</goal>
                             <goal>add-source</goal>
                         </goals>
                         <configuration>
@@ -217,6 +233,20 @@
                 </executions>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
                 <version>1.6.8</version>
@@ -224,7 +254,7 @@
                 <configuration>
                     <serverId>ossrh</serverId>
                     <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                    <autoReleaseAfterClose>false</autoReleaseAfterClose>
                 </configuration>
             </plugin>
         </plugins>

@@ -45,6 +45,7 @@ import javax.crypto.spec.DHPublicKeySpec;
 
 import javax.net.ssl.*;
 
+import sun.security.action.GetIntegerAction;
 import sun.security.internal.spec.TlsPrfParameterSpec;
 import org.openjsse.legacy8ujsse.sun.security.ssl.CipherSuite.*;
 import static org.openjsse.legacy8ujsse.sun.security.ssl.CipherSuite.PRF.*;
@@ -441,6 +442,11 @@ class CertificateMsg extends HandshakeMessage
 
     private int messageLength;
 
+    // Set the max certificate chain length to 10
+    static final int maxCertificateChainLength =
+           ((Integer)java.security.AccessController.doPrivileged(
+               new GetIntegerAction("jdk.tls.maxCertificateChainLength", 10))).intValue();
+
     CertificateMsg(X509Certificate[] certs) {
         chain = certs;
     }
@@ -458,6 +464,15 @@ class CertificateMsg extends HandshakeMessage
                     cf = CertificateFactory.getInstance("X.509");
                 }
                 v.add(cf.generateCertificate(new ByteArrayInputStream(cert)));
+
+                if (v.size() > maxCertificateChainLength) {
+                    throw new SSLProtocolException(
+                            "The certificate chain length ("
+                                    + v.size()
+                                    + ") exceeds the maximum allowed length ("
+                                    + maxCertificateChainLength
+                                    + ")");
+                }
             } catch (CertificateException e) {
                 throw (SSLProtocolException)new SSLProtocolException(
                     e.getMessage()).initCause(e);
