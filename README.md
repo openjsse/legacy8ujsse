@@ -39,3 +39,16 @@ using the following cmdline option:
     -Djava.security.properties=$JAVA_HOME/jre/lib/security/legacy8ujsse.security
     
 The Legacy8uJSSE provider replaces the SunJSSE provider.
+
+----
+### OpenJDK 8 to Legacy8uJSSE version mapping
+
+| OpenJDK8u | Legacy8uJSSE |
+|-----------|--------------|
+| 1.8.0_262 | 1.1.0        |
+| 1.8.0_271 | 1.1.1        |
+| 1.8.0_272 | 1.1.1        |
+| 1.8.0_281 | 1.1.1        |
+| 1.8.0_282 | 1.1.1        |
+| 1.8.0_291 | 1.1.2        |
+| 1.8.0_292 | 1.1.2        |
