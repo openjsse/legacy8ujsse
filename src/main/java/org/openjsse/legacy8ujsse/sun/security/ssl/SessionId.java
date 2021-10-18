@@ -27,6 +27,7 @@
 package org.openjsse.legacy8ujsse.sun.security.ssl;
 
 import java.security.SecureRandom;
+import java.security.MessageDigest;
 import java.util.Arrays;
 import javax.net.ssl.SSLProtocolException;
 
@@ -101,17 +102,9 @@ class SessionId
     {
         if (!(obj instanceof SessionId))
             return false;
-
         SessionId s = (SessionId) obj;
-        byte b [] = s.getId ();
 
-        if (b.length != sessionId.length)
-            return false;
-        for (int i = 0; i < sessionId.length; i++) {
-            if (b [i] != sessionId [i])
-                return false;
-        }
-        return true;
+        return MessageDigest.isEqual(sessionId, s.getId ());
     }
 
     /**
