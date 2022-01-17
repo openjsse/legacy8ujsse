@@ -331,13 +331,16 @@ final class CloneableDigest extends MessageDigest implements Cloneable {
     static MessageDigest getDigest(String algorithm, int n)
             throws NoSuchAlgorithmException {
         MessageDigest digest = JsseJce.getMessageDigest(algorithm);
-        try {
-            digest.clone();
-            // already cloneable, use it
-            return digest;
-        } catch (CloneNotSupportedException e) {
-            return new CloneableDigest(digest, n, algorithm);
+        if (digest instanceof Cloneable) {
+            try {
+                digest.clone();
+                // already cloneable, use it
+                return digest;
+            } catch (CloneNotSupportedException e) {
+                // create cloneable below
+            }
         }
+        return new CloneableDigest(digest, n, algorithm);
     }
 
     /**
