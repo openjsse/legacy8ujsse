@@ -28,7 +28,7 @@ Copy provider into you Java SE 8 directory:
 
 Copy provider security properties:
 
-    cp conf/security/legacy8ujsse.security $JAVA_HOME/jre/lib/ext/legacy8ujsse.jar
+    cp conf/security/legacy8ujsse.security $JAVA_HOME/jre/lib/ext/legacy8ujsse.security
 
 ----
 ### Enabling Legacy8uJSSE provider
